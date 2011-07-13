@@ -1,0 +1,57 @@
+Development Team:
+
+Franz Schmid Franz.Schmid@altmuehlnet.de
+Peter Linnell mrdocs@scribus.info
+Craig Bradney cbradney@zip.com.au
+Petr Vaněk petr@yarpen.cz
+Riku Leino riku@scribus.info
+Craig Ringer craig@postnewspapers.com.au
+Andreas Vox avox@arcor.de
+Jean Ghali jghali@libertysurf.fr
+Oleksandr Moskalenko malex@tagancha.org
+Christoph Schäfer christoph@scribus.info
+Hermann Kraus herm@scribus.info
+Pierre Marchand pierre@scribus.info
+
+Contributions from:
+
+Alessandro Rimoldi http://ideale.ch/contact
+Jean-Jacques Sarton jj.sarton@t-online.de
+Christian Töpp mr-ct@gmx.de
+Alastair Robinson blackfive@fakenhamweb.co.uk
+Eirik Øverby ltning@anduin.net
+Paul F. Johnson paul@all-the-johnsons.co.uk
+
+Official Documentation:
+
+Peter Linnell mrdocs@scribus.info
+Craig Bradney cbradney@zip.com.au
+
+Doc Translators:
+(DE) Christoph Schäfer christoph@scribus.info
+(DE)Johannes Rschel jo.rueschel@gmx.de
+(DE)Volker Ribbert volkerius@h3c.de
+(FR)Frederic Dubuy effediwhy@gmail.com
+(FR) Louis Desjardin louis_desjardins@mardigrafe.com
+(FR) François Lanctôt, thanks to GRICS 
+
+
+
+Other documentation:
+
+Yves Ceccone yves@yeccoe.org
+Holger Reibold http://www.bomots.de/scribus/
+Thomas Zastrow webmaster@thomas-zastrow.de
+
+
+Webmasters:
+
+Peter Linnell mrdocs@scribus.info
+Craig Bradney cbradney@zip.com.au
+Oleksandr Moskalenko malex@tagancha.org
+
+Scribus Font Sampler Script
+Steve Callcott stotte@ntlworld.com
+
+Several Python Scripts
+Greg Pittman  gregory_pittman@att.net

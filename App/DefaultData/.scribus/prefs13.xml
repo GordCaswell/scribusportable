@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<preferences>
+	<level name="application">
+		<context name="AlignDistributePalette">
+			<attribute key="visible" value="0"/>
+		</context>
+		<context name="Books">
+			<attribute key="visible" value="0"/>
+		</context>
+		<context name="Fonts">
+			<table name="ExtraFontDirs">
+			</table>
+		</context>
+		<context name="Layers">
+			<attribute key="visible" value="0"/>
+		</context>
+		<context name="MeasurementsPalette">
+			<attribute key="visible" value="0"/>
+		</context>
+		<context name="PropertiesPalette">
+			<attribute key="visible" value="0"/>
+		</context>
+		<context name="SP">
+			<attribute key="visible" value="0"/>
+		</context>
+		<context name="Sclib">
+			<attribute key="visible" value="0"/>
+		</context>
+		<context name="ToolBar-Edit">
+			<attribute key="DockBottom" value="1"/>
+			<attribute key="DockLeft" value="1"/>
+			<attribute key="DockRight" value="1"/>
+			<attribute key="DockTop" value="1"/>
+			<attribute key="FloatOrientation" value="1"/>
+			<attribute key="IsVisible" value="1"/>
+			<attribute key="Offset" value="0"/>
+			<attribute key="PosIndex" value="1"/>
+		</context>
+		<context name="ToolBar-File">
+			<attribute key="DockBottom" value="1"/>
+			<attribute key="DockLeft" value="1"/>
+			<attribute key="DockRight" value="1"/>
+			<attribute key="DockTop" value="1"/>
+			<attribute key="FloatOrientation" value="1"/>
+			<attribute key="IsVisible" value="1"/>
+			<attribute key="Offset" value="0"/>
+			<attribute key="PosIndex" value="0"/>
+		</context>
+		<context name="ToolBar-PDF_Tools">
+			<attribute key="DockBottom" value="1"/>
+			<attribute key="DockLeft" value="1"/>
+			<attribute key="DockRight" value="1"/>
+			<attribute key="DockTop" value="1"/>
+			<attribute key="FloatOrientation" value="1"/>
+			<attribute key="IsVisible" value="1"/>
+			<attribute key="Offset" value="0"/>
+			<attribute key="PosIndex" value="3"/>
+		</context>
+		<context name="ToolBar-Tools">
+			<attribute key="DockBottom" value="1"/>
+			<attribute key="DockLeft" value="1"/>
+			<attribute key="DockRight" value="1"/>
+			<attribute key="DockTop" value="1"/>
+			<attribute key="FloatOrientation" value="0"/>
+			<attribute key="IsVisible" value="1"/>
+			<attribute key="Offset" value="0"/>
+			<attribute key="PosIndex" value="2"/>
+		</context>
+		<context name="Tree">
+			<attribute key="visible" value="0"/>
+		</context>
+		<context name="checkDocument">
+			<attribute key="visible" value="0"/>
+		</context>
+		<context name="nodePalette">
+			<attribute key="visible" value="0"/>
+		</context>
+		<context name="uWidget">
+			<attribute key="visible" value="0"/>
+		</context>
+		<context name="undo">
+			<attribute key="historyLength" value="20"/>
+		</context>
+		<context name="undoPalette">
+			<attribute key="visible" value="0"/>
+		</context>
+		<context name="user_preferences">
+			<attribute key="gui_language" value=""/>
+		</context>
+	</level>
+	<level name="plugin">
+		<context name="StoryEditor">
+			<attribute key="height" value="400"/>
+			<attribute key="left" value="10"/>
+			<attribute key="main" value="-1"/>
+			<attribute key="side" value="-1"/>
+			<attribute key="top" value="10"/>
+			<attribute key="width" value="600"/>
+		</context>
+		<context name="pluginmanager">
+			<attribute key="barcodegenerator" value="1"/>
+			<attribute key="colorwheel" value="1"/>
+			<attribute key="fontpreview" value="1"/>
+			<attribute key="importps" value="1"/>
+			<attribute key="newfromtemplateplugin" value="1"/>
+			<attribute key="oldscribusformat" value="1"/>
+			<attribute key="oodrawimp" value="1"/>
+			<attribute key="saveastemplateplugin" value="1"/>
+			<attribute key="scribusexportpixmap" value="1"/>
+			<attribute key="scribusshortwords" value="1"/>
+			<attribute key="scriptplugin" value="1"/>
+			<attribute key="svgexplugin" value="1"/>
+			<attribute key="svgimplugin" value="1"/>
+		</context>
+		<context name="scriptplugin">
+			<attribute key="extensionscripts" value="0"/>
+			<attribute key="importall" value="1"/>
+			<attribute key="startupscript" value=""/>
+			<attribute key="syntaxcomment" value="#A0A0A0"/>
+			<attribute key="syntaxerror" value="#aa0000"/>
+			<attribute key="syntaxkeyword" value="#00007f"/>
+			<attribute key="syntaxnumber" value="#ffaa00"/>
+			<attribute key="syntaxsign" value="#aa00ff"/>
+			<attribute key="syntaxstring" value="#005500"/>
+			<attribute key="syntaxtext" value="#000000"/>
+			<table name="recentscripts">
+			</table>
+		</context>
+	</level>
+</preferences>
