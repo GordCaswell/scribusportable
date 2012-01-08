@@ -67,6 +67,13 @@ currentdict /endpage {
 	(sp\n) print
 	//endpage exec
 } .forceput
+currentdict /doimage known not {
+	currentdict /doimage { } .forceput
+} if
+currentdict /doimage {
+	currentdict i_image
+	//doimage exec
+} .forceput
 end
 setglobal
 .bindnow
@@ -247,75 +254,77 @@ currentpagedevice /HWResolution get aload pop
 	exch pop
 } bind def
 
-/makepattern { % dict matrix  makepattern patterndict
-%/makepattern =
-	% we will do some real painting here:
-	/i_shortcut true store
-	% params:
-	/i_m exch def
-	/i_dict exch def
-	% define export filename	
-	/i_basename (.png) i_exportfilename (.png) concatenate def
-	i_dict /BBox get
-		dup 0 get /i_x exch def
-		dup 1 get /i_y exch def
-		dup 2 get i_x sub /i_w exch def
-		3 get i_y sub /i_h exch def
-	% we want those in devspace:
-		i_x i_y i_m itransform matrix currentmatrix transform
-			i_vscale div /i_y exch def i_hscale div /i_x exch def
-		i_w i_h i_m idtransform matrix currentmatrix dtransform
-			i_vscale div /i_h exch def i_hscale div /i_w exch def
-		% i_h < 0 ?
-		i_h 0 le
-		{
-			/i_y i_h i_y add def
-			/i_h i_h neg def
-		} if
-		% i_w < 0 ?
-		i_w 0 le
-		{
-			/i_x i_w i_x add def
-			/i_w i_w neg def
-		} if
-	% now we can use the current matrix as pattern matrix, but with (0,0) origin
-	i_m ==
-	i_x i_y matrix currentmatrix translate /i_m exch def
-	i_m ==
-	i_dict /BBox [ 0 0 i_w i_h ] put 
-	(w x h =) = i_w = i_h =
-	% paint pattern to png file
-	gsave
-	currentcolor currentcolorspace
-	<< 
-		/OutputFile i_basename
-		/OutputDevice (pngalpha)
-		/TextAlphaBits 4
-		/GraphicsAlphaBits 4
-%		/BackgroundColor 16777215
-%		/BackgroundColor 0
-		/PageUsesTransparency true
-		/HWResolution [ 72 72 ]
-		/ProcessColorModel /DeviceRGB
-		/PageSize [i_w i_h]
-	/pngalpha finddevice putdeviceprops setdevice 
-	setcolorspace setcolor
-%	matrix currentmatrix ==
-%	0 0 transform exch = =
-%	1 1 transform exch = =
-	i_dict i_w i_h matrix identmatrix scale 
-			%matrix identmatrix 
-			//makepattern setpattern
-	0 0 i_w i_h rectfill
-	showpage
-	grestore
-	% create pattern with our extensions:
-	i_dict dup /ExportFile i_basename put
-	dup /Origin [ 0 0 transform ] put
-	i_m //makepattern
-	/i_shortcut false store
-%/makepatternE =
-} i_shortcutOverload
+% Code for reading patters is currently commented out, as it
+% doesn't seem to work correctly.
+% /makepattern { % dict matrix  makepattern patterndict
+% %/makepattern =
+% 	% we will do some real painting here:
+% 	/i_shortcut true store
+% 	% params:
+% 	/i_m exch def
+% 	/i_dict exch def
+% 	% define export filename	
+% 	/i_basename (.png) i_exportfilename (.png) concatenate def
+% 	i_dict /BBox get
+% 		dup 0 get /i_x exch def
+% 		dup 1 get /i_y exch def
+% 		dup 2 get i_x sub /i_w exch def
+% 		3 get i_y sub /i_h exch def
+% 	% we want those in devspace:
+% 		i_x i_y i_m itransform matrix currentmatrix transform
+% 			i_vscale div /i_y exch def i_hscale div /i_x exch def
+% 		i_w i_h i_m idtransform matrix currentmatrix dtransform
+% 			i_vscale div /i_h exch def i_hscale div /i_w exch def
+% 		% i_h < 0 ?
+% 		i_h 0 le
+% 		{
+% 			/i_y i_h i_y add def
+% 			/i_h i_h neg def
+% 		} if
+% 		% i_w < 0 ?
+% 		i_w 0 le
+% 		{
+% 			/i_x i_w i_x add def
+% 			/i_w i_w neg def
+% 		} if
+% 	% now we can use the current matrix as pattern matrix, but with (0,0) origin
+% 	i_m ==
+% 	i_x i_y matrix currentmatrix translate /i_m exch def
+% 	i_m ==
+% 	i_dict /BBox [ 0 0 i_w i_h ] put 
+% 	(w x h =) = i_w = i_h =
+% 	% paint pattern to png file
+% 	gsave
+% 	currentcolor currentcolorspace
+% 	<< 
+% 		/OutputFile i_basename
+% 		/OutputDevice (pngalpha)
+% 		/TextAlphaBits 4
+% 		/GraphicsAlphaBits 4
+% %		/BackgroundColor 16777215
+% %		/BackgroundColor 0
+% 		/PageUsesTransparency true
+% 		/HWResolution [ 72 72 ]
+% 		/ProcessColorModel /DeviceRGB
+% 		/PageSize [i_w i_h]
+% 	/pngalpha finddevice putdeviceprops setdevice 
+% 	setcolorspace setcolor
+% %	matrix currentmatrix ==
+% %	0 0 transform exch = =
+% %	1 1 transform exch = =
+% 	i_dict i_w i_h matrix identmatrix scale 
+% 			%matrix identmatrix 
+% 			//makepattern setpattern
+% 	0 0 i_w i_h rectfill
+% 	showpage
+% 	grestore
+% 	% create pattern with our extensions:
+% 	i_dict dup /ExportFile i_basename put
+% 	dup /Origin [ 0 0 transform ] put
+% 	i_m //makepattern
+% 	/i_shortcut false store
+% %/makepatternE =
+% } i_shortcutOverload
 
 /writecurrentpattern
 {
@@ -430,7 +439,7 @@ currentpagedevice /HWResolution get aload pop
 	currentdash 1 index length i_str cvs print ( ) print i_str cvs print ( ) print
 	0 1 2 index length 1 sub
 	{
-		1 index exch get 
+		1 index exch get
 		storeMatrix
 		dup dup dup m_b abs mul exch m_d abs mul add  exch m_a abs mul add  exch m_c abs mul add  2 div  abs
 		i_hscale div
@@ -526,8 +535,8 @@ currentpagedevice /HWResolution get aload pop
 % modified: 18.10.96
 /i_close
 {
-	(cp\n) print
 	beginX beginY i_line
+	(cp\n) print
 } bind def
 
 /storeMatrix
@@ -726,7 +735,7 @@ currentpagedevice /HWResolution get aload pop
 			xr yr i_line
 		} for
 	}ifelse
-
+	(cp\n)print
 	(f\n)print			% close polygon
 	end
 } i_shortcutOverload
@@ -773,7 +782,8 @@ currentpagedevice /HWResolution get aload pop
 			xr yr i_line
 		} for
 	}ifelse
-	(n\n)print			% stroke rect
+	(cp\n)print
+	(s\n)print			% stroke rect
 	end
 } i_shortcutOverload
 
@@ -785,8 +795,8 @@ currentpagedevice /HWResolution get aload pop
 	writecurrentlinecap
 	writecurrentlinejoin
 	writecurrentdash
-	clipCnt 1 eq 
-		{ pathClipForStroke } if
+%	clipCnt 1 eq 
+%		{ pathClipForStroke } if
 	storeMatrix
 
 	{i_move} {i_line} {i_curve} {i_close} pathforall
@@ -802,8 +812,8 @@ currentpagedevice /HWResolution get aload pop
 	writecurrentlinecap
 	writecurrentlinejoin
 	writecurrentdash
-	clipCnt 1 eq
-		{ pathClipAndClose } if
+%	clipCnt 1 eq
+%		{ pathClipAndClose } if
 	storeMatrix			% take transformation, scaling, rotation from PostScript
 	{i_move} {i_line} {i_curve} {i_close} pathforall
 	(f\n)print			% close polygon
@@ -830,8 +840,26 @@ currentpagedevice /HWResolution get aload pop
 
 	(ci\n)print			% close clip polygon begin path
 						% we have to close the path!!
-	clip
-	/clipCnt 1 def
+%	clip
+%	/clipCnt 1 def
+	newpath				% clear stack
+	end
+} i_shortcutOverload
+
+/eoclip
+{
+	userdict begin
+	(n\n)print			% start clip polygon
+
+% FIXME: pathClipAndClose first?
+
+	storeMatrix			% take transformation, scaling, rotation from PostScript
+	{i_move} {i_line} {i_curve} {i_close} pathforall
+
+	(ci\n)print			% close clip polygon begin path
+						% we have to close the path!!
+%	clip
+%	/clipCnt 1 def
 	newpath				% clear stack
 	end
 } i_shortcutOverload
@@ -876,13 +904,15 @@ currentpagedevice /HWResolution get aload pop
 	
 	(ci\n)print			% close clip polygon begin path
 						% we have to close the path!!
-	rectclip
-	/clipCnt 1 def
+%	rectclip
+%	/clipCnt 1 def
 	newpath				% clear stack
 	end
 } i_shortcutOverload
 
 
+% Code for reading images is currently commented out, as it
+% doesn't seem to work correctly.
 %    Copyright (C) 1994 Aladdin Enterprises.  All rights reserved.
 % 
 % This software is provided AS-IS with no warranty, either express or
@@ -898,7 +928,7 @@ currentpagedevice /HWResolution get aload pop
 % contact Artifex Software, Inc., 101 Lucas Valley Road #110,
 % San Rafael, CA  94903, U.S.A., +1(415)492-9861.
 
-% $Id: import.prolog 7122 2006-11-23 13:45:38Z fschmid $
+% $Id: import.prolog 13454 2009-05-08 19:04:32Z jghali $
 % traceimg.ps
 % Trace the data supplied to the 'image' operator.
 
@@ -910,6 +940,7 @@ currentpagedevice /HWResolution get aload pop
 
 /i_image			% <dict> i_image -
 {
+%dup { == == } forall
 /i_image =
 	begin 
 		/i_left Width Height mul Decode length 2 idiv mul BitsPerComponent mul 8 idiv dup /i_size exch store store 
@@ -937,7 +968,7 @@ currentpagedevice /HWResolution get aload pop
 	0 i_dict /Height get i_m dtransform atan
 	/i_angle exch def
 	(.dat) i_exportfilename
-		(im ) print												% im x y w h angle ...
+		(im ) print			% im x y w h angle ...
 		i_x i_hscale div i_str cvs print ( ) print
 		i_y i_vscale div i_str cvs print ( ) print
 		i_w i_hscale div i_str cvs print ( ) print
@@ -987,6 +1018,7 @@ currentpagedevice /HWResolution get aload pop
       dup type /filetype eq
        { i_buf 0 i_left 32 .min getinterval readstring pop
        } if
+      dup length 0 eq {pop i_zero 0 i_left 32 .min getinterval} if
       dup i_file exch writestring 
       i_left exch length sub /i_left exch def
     } loop
@@ -1095,6 +1127,7 @@ currentpagedevice /HWResolution get aload pop
 /i_datasource { (x) } def
 /i_file null def
 /i_filecount 1 def
+/i_zero 32 string def
 
 %%%% End of traceimage code
 
@@ -1103,6 +1136,7 @@ currentpagedevice /HWResolution get aload pop
 /stateTop 0 def
 /gsave
 {
+	(gs\n) print
 	userdict begin
 %	(gs\n) print
 	stateArray stateTop gstate currentgstate put
@@ -1112,6 +1146,7 @@ currentpagedevice /HWResolution get aload pop
 
 /grestore
 {
+	(gr\n) print
 	userdict begin
 	stateTop 1 lt
 	{
@@ -1123,6 +1158,13 @@ currentpagedevice /HWResolution get aload pop
 		stateArray stateTop 0 put
 	}ifelse
 	end
+} i_shortcutOverload
+
+/stringwidth
+{
+	/i_shortcut true store
+	stringwidth
+	/i_shortcut false store
 } i_shortcutOverload
 
 % a bind def of the show operator doesn't work,
@@ -1170,23 +1212,19 @@ currentpagedevice /HWResolution get aload pop
 	currentfont /FontName known
 	% stack: string
 	{
-		currentpoint /ycur exch def /xcur exch def
-		currentpoint	% x y
-		newpath
-		/clipCnt 0 def
-		moveto
-		/completeString exch def
-		% we process each char separately to get smaller paths
-		0 1 completeString length 1 sub
+		currentfont /FontType get dup 3 eq exch 0 eq or
 		{
+			currentpoint /ycur exch def /xcur exch def
+			currentpoint	% x y
+			newpath
+			/clipCnt 0 def
+			moveto
 			(n\n)print			% start polygon
 			writecurrentcolor	% write color
 			storeMatrix
-			dup completeString length 1 sub eq 
-			{ dup completeString exch 1 getinterval stringwidth } 
-			{ dup completeString i_kerning } ifelse 
+			dup
+			stringwidth
 			/curwidthy exch def /curwidthx exch def
-			completeString exch 1 getinterval dup /curstr exch def
 			false root_charpath
 			{i_move} {i_line} {i_curve} {i_close} pathforall
 			(f\n)print			% close polygon
@@ -1195,12 +1233,71 @@ currentpagedevice /HWResolution get aload pop
 			currentpoint /ycur exch def /xcur exch def
 			newpath			% clear graphic stack
 			xcur ycur moveto
-		} for
-		currentpoint	% x y
-		newpath				% clear graphic stack (and current point)
-		moveto
-	} {
-		pop		% string
+		}
+		{
+			currentpoint /ycur exch def /xcur exch def
+			currentpoint	% x y
+			newpath
+			/clipCnt 0 def
+			moveto
+			/completeString exch def
+			% we process each char separately to get smaller paths
+			0 1 completeString length 1 sub
+			{
+				(n\n)print			% start polygon
+				writecurrentcolor	% write color
+				storeMatrix
+				dup completeString length 1 sub eq 
+				{ dup completeString exch 1 getinterval stringwidth } 
+				{ dup completeString i_kerning } ifelse 
+				/curwidthy exch def /curwidthx exch def
+				completeString exch 1 getinterval dup /curstr exch def
+				false root_charpath
+				{i_move} {i_line} {i_curve} {i_close} pathforall
+				(f\n)print			% close polygon
+				newpath
+				curwidthx xcur add curwidthy ycur add moveto
+				currentpoint /ycur exch def /xcur exch def
+				newpath			% clear graphic stack
+				xcur ycur moveto
+			} for
+			currentpoint	% x y
+			newpath				% clear graphic stack (and current point)
+			moveto
+		} ifelse
+	} 
+	{
+		currentfont /FontType known
+		{
+			currentfont /FontType get dup 3 eq exch 0 eq or
+			{
+				currentpoint /ycur exch def /xcur exch def
+				currentpoint	% x y
+				newpath
+				/clipCnt 0 def
+				moveto
+				(n\n)print			% start polygon
+				writecurrentcolor	% write color
+				storeMatrix
+				dup
+				stringwidth
+				/curwidthy exch def /curwidthx exch def
+				false root_charpath
+				{i_move} {i_line} {i_curve} {i_close} pathforall
+				(f\n)print			% close polygon
+				newpath
+				curwidthx xcur add curwidthy ycur add moveto
+				currentpoint /ycur exch def /xcur exch def
+				newpath			% clear graphic stack
+				xcur ycur moveto
+			}
+			{
+				pop
+			} ifelse
+		} 
+		{ 
+			pop
+		} ifelse
 	} ifelse
 	end
 } i_shortcutOverload
@@ -1231,7 +1328,7 @@ currentpagedevice /HWResolution get aload pop
 			{ dup completeString exch 1 getinterval stringwidth } 
 			{ dup completeString i_kerning } ifelse 
 			/curwidthy exch def /curwidthx exch def
-			completeString exch 1 getinterval dup /curstr exch def 
+			completeString exch 1 getinterval dup /curstr exch def
 			false root_charpath
 			{i_move} {i_line} {i_curve} {i_close} pathforall
 			(f\n)print			% close polygon
@@ -1281,7 +1378,7 @@ currentpagedevice /HWResolution get aload pop
 			{ dup completeString exch 1 getinterval stringwidth } 
 			{ dup completeString i_kerning } ifelse 
 			/curwidthy exch def /curwidthx exch def
-			completeString exch 1 getinterval dup /curstr exch def 
+			completeString exch 1 getinterval dup /curstr exch def
 			false root_charpath
 			{i_move} {i_line} {i_curve} {i_close} pathforall
 			(f\n)print			% close polygon
@@ -1312,11 +1409,11 @@ currentpagedevice /HWResolution get aload pop
 	awidthshow
 } bind def
 
-/cshow	% proc string
-{
-	exch pop
-	show
-} i_shortcutOverload
+%/cshow	% proc string
+%{
+%	exch pop
+%	show
+%} i_shortcutOverload
 
 /kshow	% proc string
 {
@@ -1383,11 +1480,15 @@ currentpagedevice /HWResolution get aload pop
     /GlyphShowTempFont exch currentfont i_reencode
     setfont
     (\000) show 
+	currentpoint 3 -1 roll % curx cury -save-
 	restore
+	newpath
+	moveto
 } i_shortcutOverload
 
 /showpage
 {
 	(sp\n) print
 } i_shortcutOverload
+
 

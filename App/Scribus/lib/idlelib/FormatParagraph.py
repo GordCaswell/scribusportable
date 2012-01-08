@@ -15,7 +15,7 @@
 # * Fancy comments, like this bulleted list, arent handled :-)
 
 import re
-from configHandler import idleConf
+from idlelib.configHandler import idleConf
 
 class FormatParagraph:
 
@@ -75,6 +75,7 @@ class FormatParagraph:
         else:
             text.mark_set("insert", last)
         text.see("insert")
+        return "break"
 
 def find_paragraph(text, mark):
     lineno, col = map(int, mark.split("."))

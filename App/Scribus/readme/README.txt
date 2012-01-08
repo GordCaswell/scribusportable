@@ -1,235 +1,81 @@
-This is Scribus Version 1.3.3.13, the sixteenth release of the 1.3.x 
-series. We have stablized 1.3.3.x and now consider his our stable release. 
-Scribus 1.2.x is deprecated.
+SCRIBUS 1.4.0
+----------------------------------------------
 
-CHANGES 1.2.x to 1.3.x
-======================
+1.4.0 is the new stable Scribus version, released January 1 2012.
 
-Important notes on the differences between 1.2.x and 1.3.x:
+While 1.4.0 is now considered to be usable in production, you may want to keep the latest 1.3.3.14 as a fallback option for older documents due to some changes in layout. 
+Both versions can be installed in parallel. Please be aware of the fact that files saved with 1.3.4 or any later version cannot be opened by 1.3.3.x!
 
-1) Because of the new file format features, Scribus documents saved in 1.3.x
-   are *not* backwardly compatible.
+If you think you have found a bug in 1.4.0, you can use the Scribus bugtracker (http://bugs.scribus.net) to make us aware of it. Please make sure that the bug hasn't been reported earlier. The bugtracker's search feature can help you to check for issues that have already been submitted.
 
-2) Because of the new enhanced menu/keyboard shortcuts code, 1.2.x  keyboard
-   short cuts are not migrated and will need to be recreated once on the first
-   launch 1.3.x.
-
-3) On initial launch, 1.3.x will offer to convert preferences to the new 1.3.x
-   format. This is recommended. Scribus 1.3.x will store its preferences
-   separately from 1.2.x. Moreover, 1.3.2 caches available fonts. The first 
-   startup may take longer than anticipated. 
-
-
-
-Additionally, Scribus uses a different way to find fonts from Scribus 1.1.1.
-To convert older( =< 1.1.1) documents follow the procedure below:
-
-1) Create a document with the old Version of Scribus containing all your Fonts.
-2) Open the new Scribus and go to the Font Substitution List.
-3) Clear out all current substitutions.
-4) Open the Document created in 1) and substitute all the fonts with the
-   correct new fonts.
-
-When you now open old documents Scribus will convert all font names
-automatically.
-
-Scribus 1.3.3.8+ includes support for building via CMake, a replacement
-for traditional autotools. 
-Please see:http://docs.scribus.net/index.php?lang=en&page=install4 for details.
-
-For detailed changes please see the ChangeLog.
-
-To use Scribus in your native language be sure that the environment variable
-LC_ALL, LC_MESSAGES, LANG, Qt locale, OR the command line option
-of -l/--lang <lang> is set correctly. This is also can be changed in the preferences
- and takes effect immediately.
-
-The EPS/PS import feature again improved in 1.3.3 uses advanced features of Ghostscript.  We
-recommend ALL users update to the newest version of Ghostscript available for
-your distribution. In addition, if you still have GS 7.0x, there are detailed hints on
-docs.scribus.net for installing GS 8.x in parallel to the GS installed by your
-distribution.
-
-The current importer will now import raster images within an EPS file provided you have at
-least GS 8.15, with the current limitations:
-
-* imagemask doesn't work correctly
-* clip path is ignored
-* creates one file for each bitmap, which can be a lot 
-
-Activating Color Management *requires* installation of CMYK and RGB ICC
-profiles. Please see the included help files, FAQ's on www.scribus.net and
-http://docs.scribus.net for details. As of the 1.3.1 release,  Scribus ships with
-2 icc profiles, which are installed only to enable color management functionality.
-The profiles *do not* provide meaningful color management for printing. Additional
-profiles are downloadable from www.scribus.net and depend on your hardware and
-printing environment.
-
-Other notes/known issues at the time of release:
-
-There is a bug in font outline handling for some fonts in the freetype
-libraries. It's being worked on upstream. Don't file a bug report. Instead
-change the font used if you need the outlines. This is not a Scribus bug.
-Some testing has shown that this bug is not present in freetype 2.1.10+, but
-we counsel caution trying to upgrade freetype2. Upgrading freetype2 on some
-distributions can be quite difficult.
-
-PSD/CMYK TIFF Support
-
-1.3.3+ now has support for CMYK PSD and 8-bit CMYK TIFF support. RGB PSD and
-16-bit TIFF support is being developed. PSD and TIFF support includes layers, ICC 
-profiles and embedding clipping paths. CMYKA is not yet supported as there is a 
-limitation in the Qimage class. RGBA is supported. Current Scribus 1.3.4cvs does 
-handle a much larger variety of CMYKA files along with advanced PSD features.
-
-Issue with gradients:
-
-If you have gradient (e.g. with black color) with 50% shade in both beginning
- and end of gradient, you end up with darker center than edges. One expects 
-the gradient to have equal shading from beginning to end, especially if there
- is no other color-stops in-between them. This we believe is a libart issue
- and not fixable by us. The gradient will export and print properly.
- The optional cairo build is a compile time option. The is enabled by:
-./configure --enable-cairo
-The cairo build option is optional, has not received all the needed
- regression tests and requires cairo 1.8.x+ or greater. 
-Cario 1.8.x+ is strongly recommended. 
-
-Our Cairo build does not have these issues.  We encourage those
-willing to test the Cairo backend builds and report issues to the mailing 
-list and/IRC. 
-
-FONT ISSUES
-===========
-
-There are extensive notes and detailed on documentation on fonts and trouble
-shooting of font issues in the help documentation and online at 
-http://docs.scribus.net  Please read these carefully before filing bugs.
-
-There are issues with the postscript naming conventions with the Computer Modern
-Type 1 fonts, depending on distribution.  In some cases, not all fonts from the
-same family are visible in Scribus. We are working on a more complete solution
-for the next release. 
-
-
-
-BUILDING AND INSTALLING FROM SOURCE
-===================================
-
-Please see the files `BUILDING' and `INSTALL' for details on how to compile and
-install Scribus, library requirements, etc.
-
-GHOSTSCRIPT
-===========
-
-One of the more crucial tools Scribus depends on is Ghostscript. While it is
-not required for compilation, Scribus must be able to find a recent version of
-Ghostscript at runtime for all features to be present and fully working. In
-particular, printing, print preview, and PDF/EPS import will not be fully
-functional without Ghostscript. Ghostscript 8.5x is STRONGLY recommended.
-Support for versions older than 7.07 is untested and Scribus may not operate
-reliably using such an old version of gs.
-
-You can get a new version of Ghostscript from http://www.ghostscript.com/ .
-There is documentation on how to install a new version of Ghostscript on the
-Scribus website:
-    http://docs.scribus.net/index.php?lang=en&sm=dtptoolbox&page=toolbox7
-or you can just download it and install it in /usr/local, then set your PATH.
-
-If you're compiling Scribus yourself, it will whine at you during configure if
-it notices an older version of Ghostscript, or can't find it at all. If you
-know you have a newer version installed, run `gs --version' and (on bash)
-`which gs' to check what version is being used and where it's installed. You
-may need to tweak your PATH environment variable to find the newer version
-instead. Note that you can set which version of Ghostscript Scribus uses, and
-where to find it, in the Scribus preferences.
-
-Debian users who haven't installed their own newer version of Ghostscript may
-want to install gs-afpl then use:
-    `update-alternatives --config gs'
-as root to select gs-afpl as the default version of Ghostscript to use.
-
-DISTRIBUTION AND OS SPECIFIC NOTES
+Compiling from Source
 =====================
 
-For MacOSX, OS/2 and Windows Please also see the specific platform notes as 
-well. 
-
-Debian
-======
-
-If Scribus does not start while complaining about the absence of
-Postscript fonts please install either xfonts-scalable or gsfonts-x11.
-They are in the "Recommends" and will be installed by all sensible apt
-front-ends.
-
-Also see the section entitled `GHOSTSCRIPT'.
-
-SuSE / openSUSE
-========
-
-1)If you are using Qt 3.3.x, please ensure you are using the latest Qt 3.3.x
-  rpms. 
-
-2)To enable direct CUPS support which recommended, make sure both cups-devel
-  and openssl-devel are installed. Suse enables ssl support in CUPS. The
-  current Scribus config checks do not test for this. See the BUILDING file
-  for details.
+The Scribus Team endevours to provide pre-built packages for most recent major Linux distributions including Debian, Fedora, Mandriva and openSUSE, along with builds for Windows and OSX. If you need to compile from source please read the BUILDING file in the sources, as it has detailed requirements and hints.
 
 
+Web Resources:
+==============
 
-Red Hat / Fedora / CentOS
+The Scribus home page is:
+
+	http://www.scribus.net
+
+The official documentation can be found after the installation of Scribus via Help > Scribus Manual (F1) or (a rather old and incomplete copy) at:
+
+	http://docs.scribus.net
+
+Additional documentation, as well as additional scripts, all contributed by the lively Scribus community, can be found on the Scribus wiki:
+
+	http://wiki.scribus.net
+
+The latest stable and development versions of Scribus (source tarballs, DMGs for OS X, Installers [*.exe] for Windows and OS/2) are available from Sourceforge:
+
+	http://sourceforge.net/projects/scribus/files/
+
+LANGUAGE SUPPORT
 ================
 
-Fedora/RH/CentOS users are recommended to have at least Qt 3.3.2-6. These have
-important fixes for Scribus. The Scribus RPMS in Fedora Extras are of very high
-quality and have been created with close cooperation from Fedora maintainers
-and the Scribus Team. We recommend them for most users as they will ensure
-correct integration with the menuing system and mime types.
+Scribus will usually read the language setting of your operating system/your graphical user interface. If, for some reason, the detection of the "locale" setting fails or if you want to use a different language for the Scribus user interface, you can easily change it via File > Preferences > General. You can also start Scribus from the command line via "scribus -l <lang>" or "scribus --lang <lang>" (without quotes), where <lang> has to be replaced with a locale (or language) definition. For instance, "scribus -l fr" will start Scribus with a user interface in French. To find out which languages are supported, you can use either the drop-down list in the Preferences tab mentioned above or use "scribus -la"/"scribus --langs-available" on the command line. If you choose to change the UI language via the Preferences, the change will take effect immediately. Please note that the documentation included in the Help Browser is currently only available in English, French and German. If you choose any other language for the user interface, Scribus will use the English version.
 
-Please see the included help files and http://docs.scribus.net for details.
 
-Grey scale icc profiles in images are not supported in this release..
+Dependencies:
+=============
 
-There is a separate file, PACKAGING for detailed hints and notes on building
-packages for Scribus.
+To install Scribus on Linux and UNIX systems, a number of dependencies needs to be resolved, some of which are optional.
 
-On Fedora, if you report a crash bug, it would be extremely handy if you could
-build a debug version of Scribus (--enable-debug to configure) and get a stack
-trace. This is not required, but does help us diagnose the problem more quickly
-and reliably. Some information on stack traces can be found here:
+See the BUILDING file and online help for further details. In general, the package manager of your distribution will resolve these dependencies for you.
 
-http://fedora.linux.duke.edu/wiki/StackTraces
+If you want to build Scribus from source, you will also need the development versions of the required libraries. Please read the BUILDING file for further information.
 
-Mac OS X
-========
+Recommended Tools and Libraries:
+================================
 
-There is also information about building and using Scribus on Mac OS X on the
-Scribus wiki: http://wiki.scribus.net/ .
+GhostScript
+-----------
 
-A Mac OS X native Aqua port is in early testing. More information can be found
-on http://aqua.scribus.net/ Note owning to performance regressions in qt3 on OSX,
-the Qt4 port of Scribus 1.3.5svn is recommended for use. 
+One of the more crucial tools Scribus depends on is Ghostscript (gs). While it is not required for compilation, Scribus must be able to find a recent version of Ghostscript at runtime for all features to be present and fully working. In particular, the print preview and EPS import into image frames will not be functional without Ghostscript. It is recommended to always use the latest Ghostcript version.
 
-Microsoft Windows
-=================
+Support for versions older than 8.6x is untested and Scribus may not operate reliably using such an old version of gs.
 
-There is a separate readme for Windows, please see readme-win32.html
+You can find out which version of GhostScript Scribus is using in the dialog Help > About Scribus. If you have a newer version installed somewhere else you can specify its location under File > Preferences > External Tools.
 
-Additional information
-======================
+External Tools for Render Frames
+--------------------------------
 
-More hints and other information are on the www.scribus.net and docs.scribus.net
-sites. Full compile, install and FAQ's are available there.
+Since version 1.3.5 Scribus provides a unique type of frame, called "Render Frame." The purpose of this kind of item is to use external programs to render content to a (temporary) PS, EPS, PDF or PNG file and then use the output in a Scribus frame. Currently Scribus is pre-configured for the use of LaTeX, Lilypond, gnuplot, Graphviz and POVray. In order to use any of these preconfigurations, you have to install the respective programs. For download links see: http://docs.scribus.net/index.php?lang=en&page=renderframes. This web page also provides information on how to configure Render Frames for use with other programs.
 
-There is a lively on-line community, both on IRC @ #scribus on irc.freenode.net
-and the mailing list. Mailing list info can be found at:
- http://nashi.altmuehlnet.de/mailman/listinfo/scribus
+Other Recommended Tools
+-----------------------
 
-Thanks to the many translators, testers, packagers and contributors who make
-the Scribus community so special.
+A good collection of small tools and full-fledged programs for use with Scribus is described in the toolbox section of the online help.
 
-For the Scribus Team,
-Craig Ringer
-Peter Linnell
-in April 2009
+ICC Profiles for Color Management:
+===================================
+
+Activating Color Management *requires* installation of CMYK and RGB ICC profiles. Please see the included help files and FAQs for details. Scribus ships with 2 ICC profiles, which are installed only to enable color management functionality. (This is not true for some distribution packages, where licensing rules prevent the inclusion of these profiles). The profiles *may not* and probably *will not* provide meaningful color management for printing. Additional profiles, covering most of the printing industry's standard profiles, as well as test images and related documentation can be downloaded from http://www.colormanagement.org/index_en.html. Scribus 1.4. will probably be shipped with these (and other) profiles, since they have been released under a Creative Commons license.
+
+
+Happy publishing with Scribus
+
+The Scribus Team

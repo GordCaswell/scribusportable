@@ -4,18 +4,16 @@ Implements the Distutils 'clean' command."""
 
 # contributed by Bastian Kleineidam <calvin@cs.uni-sb.de>, added 2000-03-18
 
-# This module should be kept compatible with Python 2.1.
-
-__revision__ = "$Id: clean.py,v 1.16 2004/11/10 22:23:15 loewis Exp $"
+__revision__ = "$Id: clean.py 70886 2009-03-31 20:50:59Z tarek.ziade $"
 
 import os
 from distutils.core import Command
 from distutils.dir_util import remove_tree
 from distutils import log
 
-class clean (Command):
+class clean(Command):
 
-    description = "clean up output of 'build' command"
+    description = "clean up temporary files from 'build' command"
     user_options = [
         ('build-base=', 'b',
          "base build directory (default: 'build.build-base')"),

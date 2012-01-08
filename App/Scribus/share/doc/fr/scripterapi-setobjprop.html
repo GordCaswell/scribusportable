@@ -1,5 +1,9 @@
-<qt>
-<title>Choisir les propri&eacute;t&eacute;s de l'objet</title>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<title>Choisir les propri&eacute;t&eacute;s de l'objet</title>
+</head>
+<body>
 <h2>Choisir les propri&eacute;t&eacute;s de l'objet</h2>
 
 <dl>
@@ -16,7 +20,17 @@
 	
 <dt><a name="-scaleImage"><strong>scaleImage</strong></a>(...)</dt>
 <dd><code><a href="#-scaleImage">scaleImage</a>(x, y [, "nom"])</code>
-<p>D&eacute;finit les facteurs de redimensionnement de l'image dans le cadre d'image "nom". Si le "nom" n'est pas fourni, l'&eacute;l&eacute;ment s&eacute;lectionn&eacute; est utilis&eacute;. Un nombre de 1 signifie 100 %.</p>
+<p>D&eacute;finit les facteurs de redimensionnement internes de l'image dans le cadre d'image "nom". Si le "nom" n'est pas fourni, l'&eacute;l&eacute;ment s&eacute;lectionn&eacute; est utilis&eacute;. Un nombre de 1 signifie 100 %. Les facteurs de redimensionnement internes sont diff&eacute;rents des valeurs indiqu&eacute;es dans la palette des propri&eacute;t&eacute;s. Note : d&eacute;pr&eacute;ci&eacute;e, veuillez utiliser setImageScale().</p>
+<p>Peut g&eacute;n&eacute;rer <a href="scripterapi.html#WrongFrameTypeError">WrongFrameTypeError</a> si le cadre cible n'est pas un cadre d'image</p></dd>
+
+<dt><a name="-setImageScale"><strong>setImageScale</strong></a>(...)</dt>
+<dd><code><a href="#-setImageScale">setImageScale</a>(x, y [, "nom"])</code>
+<p>D&eacute;finit les facteurs de redimensionnement de l'image dans le cadre d'image "nom". Si le "nom" n'est pas fourni, l'&eacute;l&eacute;ment s&eacute;lectionn&eacute; est utilis&eacute;. Un nombre de 1 signifie 100 %. Les facteurs de redimensionnement sont &eacute;gaux aux valeurs indiqu&eacute;es dans la palette des propri&eacute;t&eacute;s.</p>
+<p>Peut g&eacute;n&eacute;rer <a href="scripterapi.html#WrongFrameTypeError">WrongFrameTypeError</a> si le cadre cible n'est pas un cadre d'image</p></dd>
+
+<dt><a name="-setImageOffset"><strong>setImageOffset</strong></a>(...)</dt>
+<dd><code><a href="#-setImageOffset">setImageOffset</a>(x, y [, "nom"])</code>
+<p>D&eacute;finit la position de l'image dans le cadre d'image "nom". Si le "nom" n'est pas fourni, l'&eacute;l&eacute;ment s&eacute;lectionn&eacute; est utilis&eacute;.  Les coordonn&eacute;es sp&eacute;cifi&eacute;es sont &eacute;gales aux valeurs indiqu&eacute;es dans la palette des propri&eacute;t&eacute;s lorsque l'unit&eacute; utilis&eacute;e est le point.</p>
 <p>Peut g&eacute;n&eacute;rer <a href="scripterapi.html#WrongFrameTypeError">WrongFrameTypeError</a> si le cadre cible n'est pas un cadre d'image</p></dd>
 
 <dt><a name="-setCornerRadius"><strong>setCornerRadius</strong></a>(...)</dt>
@@ -41,7 +55,7 @@ Si "nom" n'est pas fourni, l'&eacute;l&eacute;ment s&eacute;lectionn&eacute; est
 les constantes pour les types disponibles (FILL_&lt;type&gt;).</p></dd>
 
 <dt><a name="-setLineCap"><strong>setLineCap</strong></a>(...)</dt>
-<dd><code>setLineEnd(typeFin, ["nom"])</code>
+<dd><code>setLineCap(typeFin, ["nom"])</code>
 <p>&Eacute;tablit la valeur de style "typeFin" pour le bout de ligne de l'objet "nom".
 Si le "nom" n'est pas fourni, l'&eacute;l&eacute;ment s&eacute;lectionn&eacute; est utilis&eacute;. Il
 y a des constantes pr&eacute;d&eacute;finies pour "typeFin" - CAP_&lt;type&gt;.</p></dd>
@@ -90,5 +104,6 @@ exprim&eacute;e en points. Si le "nom" n'est pas fourni, l'&eacute;l&eacute;ment
 <p>Peut g&eacute;n&eacute;rer <a href="#ScribusException">ScribusException</a> en cas d'infraction des r&egrave;gles de liens.</p></dd>
 
 </dl>
-</qt>
+</body>
+</html>
  

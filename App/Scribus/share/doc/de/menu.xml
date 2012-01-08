@@ -19,8 +19,8 @@
     <submenuitem file="cross-platform.html" text="Plattformübergreifendes" >
       <submenuitem file="machints1.html" text="Mac OSX/Fink" />
       <submenuitem file="machints2.html" text="Mac OSX/Fink und SVN" />
-	<submenuitem text="Windows" file="readme-win32.html" />
-	<submenuitem text="OS/2" file="readme-os2.html" />
+	<submenuitem text="Windows" file="readme-win32.html"/>
+	<submenuitem text="OS/2" file="readme-os2.html"/>
     </submenuitem>
     <submenuitem file="settings1.html" text="Konfiguration" >
       <submenuitem file="keys.html" text="Tastaturkürzel" />
@@ -87,7 +87,6 @@
       <submenuitem file="toolbox13.html" text="XnView" />
       <submenuitem file="toolbox14.html" text="Lprof" />
       <submenuitem file="toolbox15.html" text="Krita" />
-      <submenuitem file="toolbox16.html" text="Fontmatrix" />
     </submenuitem>
     <submenuitem file="topten.html" text="Tips und FAQs" >
       <submenuitem file="faq1.html" text="Hilfe" />

@@ -1,4 +1,4 @@
-# Copyright (C) 2004 Python Software Foundation
+# Copyright (C) 2004-2006 Python Software Foundation
 # Authors: Baxter, Wouters and Warsaw
 # Contact: email-sig@python.org
 
@@ -19,17 +19,20 @@ the current message.  Defects are just instances that live on the message
 object's .defects attribute.
 """
 
+__all__ = ['FeedParser']
+
 import re
-from email import Errors
-from email import Message
+
+from email import errors
+from email import message
 
 NLCRE = re.compile('\r\n|\r|\n')
 NLCRE_bol = re.compile('(\r\n|\r|\n)')
-NLCRE_eol = re.compile('(\r\n|\r|\n)$')
+NLCRE_eol = re.compile('(\r\n|\r|\n)\Z')
 NLCRE_crack = re.compile('(\r\n|\r|\n)')
 # RFC 2822 $3.6.8 Optional fields.  ftext is %d33-57 / %d59-126, Any character
 # except controls, SP, and ":".
-headerRE = re.compile(r'^(From |[\041-\071\073-\176]{2,}:|[\t ])')
+headerRE = re.compile(r'^(From |[\041-\071\073-\176]{1,}:|[\t ])')
 EMPTYSTRING = ''
 NL = '\n'
 
@@ -101,6 +104,10 @@ class BufferedSubFile(object):
         # data after the final RE.  In the case of a NL/CR terminated string,
         # this is the empty string.
         self._partial = parts.pop()
+        #GAN 29Mar09  bugs 1555570, 1721862  Confusion at 8K boundary ending with \r:
+        # is there a \n to follow later?
+        if not self._partial and parts and parts[-1].endswith('\r'):
+            self._partial = parts.pop(-2)+parts.pop()
         # parts is a list of strings, alternating between the line contents
         # and the eol character(s).  Gather up a list of lines after
         # re-attaching the newlines.
@@ -130,7 +137,7 @@ class BufferedSubFile(object):
 class FeedParser:
     """A feed-style parser of email."""
 
-    def __init__(self, _factory=Message.Message):
+    def __init__(self, _factory=message.Message):
         """_factory is called with no arguments to create a new message obj"""
         self._factory = _factory
         self._input = BufferedSubFile()
@@ -164,7 +171,7 @@ class FeedParser:
         # Look for final set of defects
         if root.get_content_maintype() == 'multipart' \
                and not root.is_multipart():
-            root.defects.append(Errors.MultipartInvariantViolationDefect())
+            root.defects.append(errors.MultipartInvariantViolationDefect())
         return root
 
     def _new_message(self):
@@ -277,7 +284,7 @@ class FeedParser:
                 # defined a boundary.  That's a problem which we'll handle by
                 # reading everything until the EOF and marking the message as
                 # defective.
-                self._cur.defects.append(Errors.NoBoundaryInMultipartDefect())
+                self._cur.defects.append(errors.NoBoundaryInMultipartDefect())
                 lines = []
                 for line in self._input:
                     if line is NeedMoreData:
@@ -381,7 +388,7 @@ class FeedParser:
             # that as a defect and store the captured text as the payload.
             # Everything from here to the EOF is epilogue.
             if capturing_preamble:
-                self._cur.defects.append(Errors.StartBoundaryNotFoundDefect())
+                self._cur.defects.append(errors.StartBoundaryNotFoundDefect())
                 self._cur.set_payload(EMPTYSTRING.join(preamble))
                 epilogue = []
                 for line in self._input:
@@ -432,7 +439,7 @@ class FeedParser:
                     # The first line of the headers was a continuation.  This
                     # is illegal, so let's note the defect, store the illegal
                     # line, and ignore it for purposes of headers.
-                    defect = Errors.FirstHeaderLineIsContinuationDefect(line)
+                    defect = errors.FirstHeaderLineIsContinuationDefect(line)
                     self._cur.defects.append(defect)
                     continue
                 lastvalue.append(line)
@@ -460,13 +467,13 @@ class FeedParser:
                 else:
                     # Weirdly placed unix-from line.  Note this as a defect
                     # and ignore it.
-                    defect = Errors.MisplacedEnvelopeHeaderDefect(line)
+                    defect = errors.MisplacedEnvelopeHeaderDefect(line)
                     self._cur.defects.append(defect)
                     continue
             # Split the line on the colon separating field name from value.
             i = line.find(':')
             if i < 0:
-                defect = Errors.MalformedHeaderDefect(line)
+                defect = errors.MalformedHeaderDefect(line)
                 self._cur.defects.append(defect)
                 continue
             lastheader = line[:i]
