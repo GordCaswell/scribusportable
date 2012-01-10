@@ -1,7 +1,9 @@
 !macro CustomCodePreInstall
-	${If} ${FileExists} $InstDir\Data\.scribus
-		Rename $InstDir\Data\.scribus\scribus13.rc $InstDir\Data\.scribus\scribus140.rc
-		Rename $InstDir\Data\.scribus\prefs13.xml $InstDir\Data\.scribus\prefs140.xml
-		Rename $InstDir\Data\.scribus $InstDir\Data\Scribus
+	${If} ${FileExists} "$INSTDIR\App\AppInfo\AppInfo.ini"
+		ReadINIStr $0 "$INSTDIR\App\AppInfo\appinfo.ini" "Version" "PackageVersion"
+		${VersionCompare} "$0" "1.3.99.2" $1
+		${If} $1 == "2"  ;$0 is older than
+			Delete "$INSTDIR\Data"
+		${EndIf}
 	${EndIf}
 !macroend
