@@ -121,4 +121,4 @@ ${SegmentPost}
 	${AndIf} ${RegistryKeyExists} "HKCU\Software\GPL Ghostscript"
 		${registry::DeleteKey} "HKCU\Software\GPL Ghostscript" $R9
 	${EndIf}
-!macroend[\v;.
+!macroend
