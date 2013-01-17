@@ -78,6 +78,7 @@
 			<attribute key="barcodegenerator" value="0"/>
 			<attribute key="colorwheel" value="0"/>
 			<attribute key="fontpreview" value="0"/>
+			<attribute key="hunspellplugin" value="0"/>
 			<attribute key="importai" value="0"/>
 			<attribute key="importcvg" value="0"/>
 			<attribute key="importpct" value="0"/>
